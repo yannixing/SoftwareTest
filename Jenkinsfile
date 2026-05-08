@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo '从 GitHub 拉取代码...'
-                git branch: 'main', url: 'https://github.com/yannixing/SoftwareTest.git'
+                git branch: 'master', url: 'https://github.com/yannixing/SoftwareTest.git'
             }
         }
         

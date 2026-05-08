@@ -12,8 +12,27 @@ pipeline {
         stage('Test') {
             steps {
                 echo '运行 pytest 测试...'
-                sh 'pip install pytest pytest-html'
-                sh 'pytest test_demo.py --html=report.html --self-contained-html'
+        
+                sh '''
+                #!/bin/bash
+        
+                # 创建虚拟环境（如果不存在）
+                if [ ! -d "venv" ]; then
+                    python3 -m venv venv
+                fi
+        
+                # 激活虚拟环境
+                source venv/bin/activate
+        
+                # 升级 pip
+                pip install --upgrade pip
+        
+                # 安装依赖
+                pip install pytest pytest-html
+        
+                # 运行测试
+                pytest test_demo.py --html=report.html --self-contained-html
+                '''
             }
         }
         

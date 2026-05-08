@@ -2,12 +2,6 @@ pipeline {
     agent any
     
     stages {
-        stage('Checkout') {
-            steps {
-                echo '从 GitHub 拉取代码...'
-                git branch: 'master', url: 'https://github.com/yannixing/SoftwareTest.git'
-            }
-        }
         
         stage('Test') {
             steps {
@@ -15,21 +9,7 @@ pipeline {
         
                 sh '''
                 #!/bin/bash
-        
-                # 创建虚拟环境（如果不存在）
-                if [ ! -d "venv" ]; then
-                    python3 -m venv venv
-                fi
-        
-                # 激活虚拟环境
-                source venv/bin/activate
-        
-                # 升级 pip
-                pip install --upgrade pip
-        
-                # 安装依赖
-                pip install pytest pytest-html
-        
+                source test/bin/activate
                 # 运行测试
                 pytest test_demo.py --html=report.html --self-contained-html
                 '''

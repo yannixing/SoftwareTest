@@ -18,7 +18,7 @@ pipeline {
                 fi
         
                 # 激活虚拟环境
-                source test/bin/activate
+                . test/bin/activate
         
                 # 安装依赖
                 python -m pip install --upgrade pip
